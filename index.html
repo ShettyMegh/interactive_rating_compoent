@@ -39,7 +39,7 @@
     }
 
     .ratingCard{
-      display: none;
+      display: block;
       background-color: #262F38;
       width: 350px;
       height: auto;
@@ -107,6 +107,33 @@
 
     /*After Submission Card*/
     
+    .submitCard{
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 350px;
+      height: auto;
+      background-color: #262F38;
+      padding: 30px;
+      border-radius: 30px;
+    }
+
+    .submitCard__selectedRating{
+      color: var(--Orange);
+      background-color: #292F37;
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+
+    .submitCard__title{
+      color: var(--White);
+    }
+
+    .submitCard__desc{
+      text-align: center;
+      color: var(--Medium_Grey);
+    }
 
   </style>
 </head>
@@ -140,7 +167,18 @@
     </div>
 
 
-    
+    <div class="submitCard">
+      <img src="./images/illustration-thank-you.svg" alt="" class="submitCard__img">
+      <p class="submitCard__selectedRating"></p>
+      <h2 class="submitCard__title">Thank you!</h2>
+      <p class="submitCard__desc">
+        We apperciate you taking the time to give a rating <br>
+        If you ever need more support, dont hesitate to <br>
+        get in touch!
+      </p>
+    </div>
+
+
 
   </main>
 
@@ -148,28 +186,36 @@
 
     //ratings logic
     let ratings = document.querySelectorAll(".rating");
+    let selectedRating = document.querySelector(".submitCard__selectedRating");
+    let ratingNumber ="";
     ratings.forEach(rating=>{
       rating.addEventListener("click",activeRating);
     })
 
     function activeRating(){
-      let ratingNumber = this.dataset.rating;
+      ratingNumber=this.dataset.rating;
       ratings.forEach(rating=>{
         rating.classList.remove("active");
       })
       this.classList.add("active");
+      selectedRating.innerText = `You selected ${ratingNumber} out of 5`;
+
     }
 
-    //submit button logic
-    let submit = document.querySelector("button");
-    let card = document.querySelector(".ratingCard");
-    submit.addEventListener('click',submitReview);
+    //submit logic
+    let submitBtn = document.querySelector("button");
+    let ratingCard = document.querySelector(".ratingCard");
+    let submitCard = document.querySelector(".submitCard")
+    submitBtn.addEventListener('click',submitReview);
 
     function submitReview(){
-      card.style.display="none";
+      ratingCard.style.display="none";
+      submitCard.style.display="flex";
     }
 
-    //after submit logic
+    
+
+
   </script>
   
 </body>
